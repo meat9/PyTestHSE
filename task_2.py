@@ -26,6 +26,9 @@ class Queue:
         Вернуть элемент с начала очереди. Следует вернуть None, если элемента нет.
         :return: Снятый с начала очереди элемент
         """
+        if len(self.queue) == 0:
+            return None
+
         value = self.queue.pop(len(self.queue)-1)
         return value
 
@@ -43,7 +46,7 @@ class Queue:
 
     def clear(self) -> None:
         """ Очистить очередь. """
-        if not self.queue:
+        if len(self.queue) == 0:
             return None
 
         self.queue.clear()
