@@ -15,7 +15,7 @@ class Queue:
         """
         self.queue = []
 
-    def isEmpty(self):
+    def empty(self):
         """Проверка очереди на пустоту"""
         return self.queue == []
 
@@ -33,7 +33,7 @@ class Queue:
         Вернуть элемент с начала очереди. Следует вернуть None, если элемента нет.
         :return: Снятый с начала очереди элемент
         """
-        if self.isEmpty():
+        if self.empty():
             return None
         return self.queue.pop(0)
 
@@ -49,8 +49,6 @@ class Queue:
 
     def clear(self) -> None:
         """ Очистить очередь. """
-        if self.isEmpty():
-            return None
         self.queue.clear()
         return None
 
