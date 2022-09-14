@@ -48,7 +48,7 @@ def main():
     list_freq = []  # список, где будем хранить отношение количества выпавших орлов к решке
     for res in check_random(coin, counts, list_freq):  # вывод результата проверки случайности random
         print(res)
-    input("Press Enter to close...")
+    input("Press eny key to close...")
 
 
 main()
