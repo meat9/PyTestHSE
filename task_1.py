@@ -6,21 +6,49 @@
 
 Дальше найдем количество выпавших орлов и решек. И поделим меньше из этих выпаданий на большее.  
 Чем ближе к 1 будет результат, тем честнее монета :)
-"""
 
+#########
+Задание выполнено следующим образом:
+Все входные данные описываются в функции main.
+Из нее вызывается функция check_random, которая производит все необходимые вычисления и возвращает список с результатами.
+Каждый элемент списка соответсвует результату деления меньших выпаданий на большее с указанием кол-ва подбрасываний
+По результатам выполнения происходит построчный вывод списка в терминал.
+Пример вывода:
+    Randomness of choice at 10 coin tosses: 0.6667
+    Randomness of choice at 100 coin tosses: 0.8519
+    Randomness of choice at 1000 coin tosses: 0.9531
+    Randomness of choice at 100000 coin tosses: 0.9978
+    Randomness of choice at 1000000 coin tosses: 0.9999
+#########
+"""
 from random import choice
 
 
-EAGLE = "Орел"
-TAILS = "Решка"
+def check_random(coin, counts, list_freq):
+    for count in counts:  # обход массива с кол-вом подбрасываний
+        cnt_eagle = 0  # количество выпавших "орлов"
+        cnt_tails = 0  # количество выпавших "решек"
+        for i in range(count):  # "подбросим монетку" count раз
+            rand = choice(coin)  # случайный выбор "орла" или "решки"
+            if rand == coin[0]:
+                cnt_eagle += 1  # подсчитаем кол-во выпаданий "орлов"
+            else:
+                cnt_tails += 1  # подсчитаем кол-во выпаданий "решек"
+        division = cnt_eagle/cnt_tails if cnt_eagle <= cnt_tails else cnt_tails/cnt_eagle  # разделим меньшее на большее количество выпаданий
+        division = round(division,4) # округлим результат до 4х знаков после запятой
+        list_freq.append("Randomness of choice at " + str(count) + " coin tosses: " + str(division))  # запись результата вычислений в лист
+    return list_freq
 
-coin = [EAGLE, TAILS]  # монета, для которой нужно выбрать случайную сторону
-counts = [10, 100, 1000, 100000, 1000000]  # различное количество подбрасываний
-list_freq = []  # список, где будем хранить отношение количества выпавших орлов к решке
 
-for count in counts:
-    ...  # TODO подсчитать количество выпаданий орлов и решек
+def main():
+    eagle = "Орел"
+    tails = "Решка"
+    coin = [eagle, tails]  # монета, для которой нужно выбрать случайную сторону
+    counts = [10, 100, 1000, 100000, 1000000]  # различное количество подбрасываний
+    list_freq = []  # список, где будем хранить отношение количества выпавших орлов к решке
+    for res in check_random(coin, counts, list_freq):  # вывод результата проверки случайности random
+        print(res)
+    input("Press Enter to close...")
 
-    # TODO разделить минимальное число среди орлов и решек на максимальное число и сохранить результат
 
-print(list_freq)
+main()
